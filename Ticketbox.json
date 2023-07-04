@@ -1,0 +1,619 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "TicketBox API"
+  },
+  "basePath": "/api",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/venues": {
+      "get": {
+        "summary": "Get a list of venues",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Venue"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new venue",
+        "parameters": [
+          {
+            "name": "venue",
+            "in": "body",
+            "description": "The venue to create",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NewVenue"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Venue"
+            }
+          }
+        }
+      }
+    },
+    "/venues/{venueId}": {
+      "get": {
+        "summary": "Get a venue by ID",
+        "parameters": [
+          {
+            "name": "venueId",
+            "in": "path",
+            "description": "The ID of the venue",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Venue"
+            }
+          },
+          "404": {
+            "description": "Venue not found"
+          }
+        }
+      }
+    },
+    "/shows": {
+      "get": {
+        "summary": "Get a list of shows",
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "description": "The status of the shows to retrieve",
+            "type": "string"
+          },
+          {
+            "name": "organizerId",
+            "in": "query",
+            "description": "The ID of the organizer",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Show"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new show",
+        "parameters": [
+          {
+            "name": "show",
+            "in": "body",
+            "description": "The show to create",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NewShow"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Show"
+            }
+          }
+        }
+      }
+    },
+    "/shows/{showId}": {
+      "get": {
+        "summary": "Get a show by ID",
+        "parameters": [
+          {
+            "name": "showId",
+            "in": "path",
+            "description": "The ID of the show",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Show"
+            }
+          },
+          "404": {
+            "description": "Show not found"
+          }
+        }
+      }
+    },
+    "/organizers": {
+      "get": {
+        "summary": "Get a list of organizers",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Organizer"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new organizer",
+        "parameters": [
+          {
+            "name": "organizer",
+            "in": "body",
+            "description": "The organizer to create",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NewOrganizer"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Organizer"
+            }
+          }
+        }
+      }
+    },
+    "/organizers/{organizerId}": {
+      "get": {
+        "summary": "Get an organizer by ID",
+        "parameters": [
+          {
+            "name": "organizerId",
+            "in": "path",
+            "description": "The ID of the organizer",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Organizer"
+            }
+          },
+          "404": {
+            "description": "Organizer not found"
+          }
+        }
+      }
+    },
+    "/sessions": {
+      "get": {
+        "summary": "Get a list of sessions",
+        "parameters": [
+          {
+            "name": "showId",
+            "in": "query",
+            "description": "The ID of the show",
+            "type": "string"
+          },
+          {
+            "name": "venueId",
+            "in": "query",
+            "description": "The ID of the venue",
+            "type": "string"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "description": "The date of the session",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Session"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new session",
+        "parameters": [
+          {
+            "name": "session",
+            "in": "body",
+            "description": "The session to create",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NewSession"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Session"
+            }
+          }
+        }
+      }
+    },
+    "/sessions/{sessionId}": {
+      "get": {
+        "summary": "Get a session by ID",
+        "parameters": [
+          {
+            "name": "sessionId",
+            "in": "path",
+            "description": "The ID of the session",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Session"
+            }
+          },
+          "404": {
+            "description": "Session not found"
+          }
+        }
+      }
+    },
+    "/tickets": {
+      "post": {
+        "summary": "Create a new ticket",
+        "parameters": [
+          {
+            "name": "ticket",
+            "in": "body",
+            "description": "The ticket to create",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NewTicket"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Ticket"
+            }
+          }
+        }
+      }
+    },
+    "/tickets/{ticketId}": {
+      "get": {
+        "summary": "Get a ticket by ID",
+        "parameters": [
+          {
+            "name": "ticketId",
+            "in": "path",
+            "description": "The ID of the ticket",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Ticket"
+            }
+          },
+          "404": {
+            "description": "Ticket not found"
+          }
+        }
+      }
+    },
+    "/purchase-requests": {
+      "post": {
+        "summary": "Create a new purchase request",
+        "parameters": [
+          {
+            "name": "purchaseRequest",
+            "in": "body",
+            "description": "The purchase request to create",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NewPurchaseRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/PurchaseRequest"
+            }
+          }
+        }
+      }
+    },
+    "/purchase-requests/{requestId}": {
+      "get": {
+        "summary": "Get a purchase request by ID",
+        "parameters": [
+          {
+            "name": "requestId",
+            "in": "path",
+            "description": "The ID of the purchase request",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PurchaseRequest"
+            }
+          },
+          "404": {
+            "description": "Purchase request not found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Venue": {
+      "type": "object",
+      "properties": {
+        "idVenue": {
+          "type": "string"
+        },
+        "nameIndex": {
+          "type": "string"
+        },
+        "addressDetail": {
+          "type": "string"
+        }
+      }
+    },
+    "NewVenue": {
+      "type": "object",
+      "properties": {
+        "nameIndex": {
+          "type": "string"
+        },
+        "addressDetail": {
+          "type": "string"
+        }
+      }
+    },
+    "Organizer": {
+      "type": "object",
+      "properties": {
+        "idOrganizer": {
+          "type": "string"
+        },
+        "nameIndex": {
+          "type": "string"
+        },
+        "contactPoint": {
+          "$ref": "#/definitions/ContactPoint"
+        },
+        "partner": {
+          "type": "string"
+        }
+      }
+    },
+    "NewOrganizer": {
+      "type": "object",
+      "properties": {
+        "nameIndex": {
+          "type": "string"
+        },
+        "contactPoint": {
+          "$ref": "#/definitions/ContactPoint"
+        },
+        "partner": {
+          "type": "string"
+        }
+      }
+    },
+    "Show": {
+      "type": "object",
+      "properties": {
+        "eventId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "organizer": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "expired",
+            "open"
+          ]
+        },
+        "sessions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "NewShow": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "organizer": {
+          "type": "string"
+        }
+      }
+    },
+    "Session": {
+      "type": "object",
+      "properties": {
+        "sessionId": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string"
+        },
+        "venue": {
+          "type": "string"
+        }
+      }
+    },
+    "NewSession": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string"
+        },
+        "venue": {
+          "type": "string"
+        }
+      }
+    },
+    "ContactPoint": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "mobile": {
+          "type": "string"
+        },
+        "user": {
+          "type": "string"
+        }
+      }
+    },
+    "Ticket": {
+      "type": "object",
+      "properties": {
+        "ticketId": {
+          "type": "string"
+        },
+        "sessionId": {
+          "type": "string"
+        },
+        "eventId": {
+          "type": "string"
+        },
+        "seatplanId": {
+          "type": "string"
+        },
+        "seatName": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "zone",
+            "seat"
+          ]
+        },
+        "reservationCapacity": {
+          "type": "integer"
+        },
+        "actualCapacity": {
+          "type": "integer"
+        },
+        "remaining": {
+          "type": "integer"
+        },
+        "priceCat": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number"
+        }
+      }
+    },
+    "NewTicket": {
+      "type": "object",
+      "properties": {
+        "sessionId": {
+          "type": "string"
+        },
+        "eventId": {
+          "type": "string"
+        },
+        "seatplanId": {
+          "type": "string"
+        },
+        "seatName": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "zone",
+            "seat"
+          ]
+        },
+        "reservationCapacity": {
+          "type": "integer"
+        },
+        "actualCapacity": {
+          "type": "integer"
+        },
+        "remaining": {
+          "type": "integer"
+        },
+        "priceCat": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number"
+        }
+      }
+    }
+  }
+}
